@@ -18,12 +18,12 @@ class RecyclerTouchListener constructor(context: Context, val recyclerView: Recy
                 return true
             }
 
-            override fun onLongPress(e: MotionEvent?) {
-                val child = recyclerView.findChildViewUnder(e!!.x, e.y)
-                if (child != null && clickListener != null) {
-                    clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child))
-                }
-            }
+//            override fun onLongPress(e: MotionEvent?) {
+//                val child = recyclerView.findChildViewUnder(e!!.x, e.y)
+//                if (child != null && clickListener != null) {
+//                    clickListener.onLongClick(child, recyclerView.getChildLayoutPosition(child))
+//                }
+//            }
         })
     }
 

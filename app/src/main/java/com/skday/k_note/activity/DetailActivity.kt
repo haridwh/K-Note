@@ -18,15 +18,13 @@ class DetailActivity : BaseActivity() {
         toolbar.title = note.title
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        tv_date.text = note.date
+        val date = "Last modified: "+note.date
+        tv_date.text = date
         tv_detail.text = note.detail
     }
 
     fun getData(): Note{
         val position = intent.extras.getInt("position")
-        Log.i("TAG", position.toString())
-
         return PrefsNote.getNote(this)!!.listNote.get(position)
     }
 }

@@ -6,5 +6,5 @@ import java.util.*
  * Created by skday on 2/12/17.
  */
 data class ListNote(
-    var listNote: List<Note>
+    var listNote: ArrayList<Note>
 )

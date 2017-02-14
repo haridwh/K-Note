@@ -1,10 +1,13 @@
 package com.skday.k_note.activity
 
+import android.app.DialogFragment
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.skday.k_note.R
 import com.skday.k_note.base.BaseActivity
+import com.skday.k_note.fragment.PassDialog
 import com.skday.k_note.model.ListNote
 import com.skday.k_note.model.Note
 import com.skday.k_note.prefs.PrefsNote
@@ -13,6 +16,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class WriteActivity : BaseActivity() {
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,27 +35,39 @@ class WriteActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.write) {
             var items: ListNote? = PrefsNote.getNote(this)
+            var password = ""
+            if (til_pass.visibility == View.VISIBLE){
+                password = et_pass.text.toString()
+            }
             if (items != null) {
                 val tmp: ArrayList<Note> = items.listNote as ArrayList<Note>
-                tmp.add(Note(et_title.text.toString(), et_detail.text.toString(), getDate(), ""))
+                tmp.add(Note(et_title.text.toString(), et_detail.text.toString(), getDate(), password))
                 items.listNote = tmp
                 PrefsNote.setNote(items, this)
             } else {
                 val tmp: ArrayList<Note> = ArrayList()
-                tmp.add(Note(et_title.text.toString(), et_detail.text.toString(), getDate(), ""))
+                tmp.add(Note(et_title.text.toString(), et_detail.text.toString(), getDate(), password))
                 items = ListNote(tmp)
                 PrefsNote.setNote(items, this)
 
             }
             finish()
+        } else if (item?.itemId == R.id.pass) {
+            if (til_pass.visibility == View.GONE) {
+                til_pass.visibility = View.VISIBLE
+            } else {
+                til_pass.visibility = View.GONE
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    fun getDate(): String{
+    fun getDate(): String {
         val cal = Calendar.getInstance()
-        val df = SimpleDateFormat("dd MMM yyyy")
+
+        val df = SimpleDateFormat("HH:mm, dd MMM yyyy")
         val formattedDate = df.format(cal.time)
+
         return formattedDate
     }
 }
