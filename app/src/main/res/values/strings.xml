@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">K-Note</string>
+
+    <string name="hint_title">Title</string>
+    <string name="hint_detail">Type your note&#8230;</string>
+
+    <string name="write_menu">Write</string>
+</resources>
