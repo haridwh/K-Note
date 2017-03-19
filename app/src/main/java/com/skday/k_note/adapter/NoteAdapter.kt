@@ -1,6 +1,7 @@
 package com.skday.k_note.adapter
 
 import android.content.Context
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,7 +18,7 @@ import java.util.*
  * Created by skday on 2/12/17.
  */
 
-class NoteAdapter constructor(val contex: Context, val items: ArrayList<Note>)
+class NoteAdapter constructor(val contex: Context, val items: ArrayList<Note>, val rv: RecyclerView)
     : RecyclerView.Adapter<NoteAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
     class ViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
@@ -36,7 +37,6 @@ class NoteAdapter constructor(val contex: Context, val items: ArrayList<Note>)
     }
 
     override fun getItemCount(): Int {
-        Log.i("TAG", items.size.toString()+"as")
         return items.size
     }
 
@@ -61,11 +61,19 @@ class NoteAdapter constructor(val contex: Context, val items: ArrayList<Note>)
     override fun onItemDismiss(position: Int) {
         Log.i("TAG",position.toString()+"Pos")
         Log.i("TAG", items.size.toString()+"Size1")
-        items.removeAt(position)
+        val note = items.removeAt(position)
         Log.i("TAG", items.size.toString()+"Size2")
         val listNote = PrefsNote.getNote(contex)
         listNote?.listNote?.removeAt(position)
         PrefsNote.setNote(listNote!!, contex)
+
+        Snackbar.make(rv,"Note Removed", Snackbar.LENGTH_LONG)
+                .setAction("UNDO", { view ->
+                    listNote.listNote.add(position, note)
+                    PrefsNote.setNote(listNote,contex)
+                    items.add(position, note)
+                    notifyItemInserted(position)
+                }).show()
         notifyItemRemoved(position)
     }
 

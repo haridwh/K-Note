@@ -40,9 +40,7 @@ class WriteActivity : BaseActivity() {
                 password = et_pass.text.toString()
             }
             if (items != null) {
-                val tmp: ArrayList<Note> = items.listNote as ArrayList<Note>
-                tmp.add(Note(et_title.text.toString(), et_detail.text.toString(), getDate(), password))
-                items.listNote = tmp
+                items.listNote.add(Note(et_title.text.toString(), et_detail.text.toString(), getDate(), password))
                 PrefsNote.setNote(items, this)
             } else {
                 val tmp: ArrayList<Note> = ArrayList()

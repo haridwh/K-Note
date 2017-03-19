@@ -1,6 +1,5 @@
 package com.skday.k_note.activity
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
@@ -13,13 +12,18 @@ import com.skday.k_note.adapter.NoteAdapter
 import com.skday.k_note.base.BaseActivity
 import com.skday.k_note.fragment.PassDialog
 import com.skday.k_note.model.ListNote
+import com.skday.k_note.model.Note
 import com.skday.k_note.prefs.PrefsNote
 import com.skday.k_note.utils.ClickListener
 import com.skday.k_note.utils.RecyclerTouchListener
 import com.skday.k_note.utils.SimpleItemTouchHelperCallback
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : BaseActivity() {
+
+    var adapter: NoteAdapter? = null
+    var items: ArrayList<Note>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +35,15 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
         setRV()
+        items = PrefsNote.getNote(this)?.listNote
+        setAdapter(items)
     }
 
     override fun onResume() {
         super.onResume()
-        val items: ListNote? = PrefsNote.getNote(this)
-        setAdapter(items)
+        items?.clear()
+        PrefsNote.getNote(this)?.listNote?.let { items?.addAll(it) }
+        adapter?.notifyDataSetChanged()
     }
 
     fun setRV() {
@@ -56,13 +63,15 @@ class MainActivity : BaseActivity() {
         }))
     }
 
-    fun setAdapter(items: ListNote?) {
+    fun setAdapter(items: ArrayList<Note>?) {
         if (items != null) {
-            val adapter: NoteAdapter = NoteAdapter(this, items.listNote)
-            val callBack = SimpleItemTouchHelperCallback(adapter)
+            Log.i("TAG", items!!.size.toString() + "Main")
+            adapter = NoteAdapter(this, items, rv)
+            Log.i("TAG", adapter!!.itemCount.toString() + "adapter")
+            rv.adapter = adapter
+            val callBack = SimpleItemTouchHelperCallback(adapter!!)
             val touchHelper = ItemTouchHelper(callBack)
             touchHelper.attachToRecyclerView(rv)
-            rv.adapter = adapter
         }
     }
 
@@ -74,12 +83,7 @@ class MainActivity : BaseActivity() {
         }
         ft.addToBackStack(null)
 
-//        val matrics = resources.displayMetrics
-//        val width = matrics.widthPixels
-//        val height = matrics.heightPixels
-
         val passDialog= PassDialog.newInstance(position)
-//        passDialog.window.setLayout((6 * width)/7, (4 * height)/5)
         passDialog.show(ft, "dialog")
     }
 }

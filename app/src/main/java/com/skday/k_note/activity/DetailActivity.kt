@@ -1,8 +1,6 @@
 package com.skday.k_note.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.skday.k_note.R
 import com.skday.k_note.base.BaseActivity
 import com.skday.k_note.model.Note

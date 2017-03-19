@@ -2,18 +2,14 @@ package com.skday.k_note.utils
 
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.util.Log
 import com.skday.k_note.adapter.ItemTouchHelperAdapter
+import com.skday.k_note.adapter.NoteAdapter
 
 /**
  * Created by skday on 2/14/17.
  */
 class SimpleItemTouchHelperCallback constructor(val adapter: ItemTouchHelperAdapter) : ItemTouchHelper.Callback() {
-
-//    var adapter: ItemTouchHelperAdapter? = null
-//
-//    init {
-//        this.adapter = adapter
-//    }
 
     override fun isLongPressDragEnabled(): Boolean {
         return true
@@ -35,10 +31,7 @@ class SimpleItemTouchHelperCallback constructor(val adapter: ItemTouchHelperAdap
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        if (direction == ItemTouchHelper.END || direction == ItemTouchHelper.START){
             adapter.onItemDismiss(viewHolder.adapterPosition)
-        }
-
     }
 
 
