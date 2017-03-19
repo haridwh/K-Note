@@ -31,21 +31,17 @@
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             tools:listitem="@layout/item"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom|end"
-            android:orientation="vertical">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:backgroundTint="@color/colorPrimary"
-                app:layout_anchorGravity="bottom|right|end"
-                app:srcCompat="@drawable/ic_mode_edit_white_18dp"/>
-        </LinearLayout>
     </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_anchor="@id/rv"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_behavior="com.skday.k_note.utils.FabHideOnScroll"
+        app:srcCompat="@drawable/ic_mode_edit_white_18dp"
+        />
 </android.support.design.widget.CoordinatorLayout>
