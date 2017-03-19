@@ -1,6 +1,8 @@
 package com.skday.k_note.adapter
 
+import android.animation.ArgbEvaluator
 import android.content.Context
+import android.graphics.Color
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -11,8 +13,18 @@ import android.widget.TextView
 import com.skday.k_note.R
 import com.skday.k_note.model.Note
 import com.skday.k_note.prefs.PrefsNote
+import com.skday.k_note.utils.ItemTouchHelperViewHolder
 import kotlinx.android.synthetic.main.item.view.*
 import java.util.*
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.TransitionDrawable
+import android.animation.ObjectAnimator
+
+
+
+
+
+
 
 /**
  * Created by skday on 2/12/17.
@@ -21,9 +33,19 @@ import java.util.*
 class NoteAdapter constructor(val contex: Context, val items: ArrayList<Note>, val rv: RecyclerView)
     : RecyclerView.Adapter<NoteAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
-    class ViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder constructor(view: View) : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder{
         val title: TextView = view.tv_title
         val date: TextView = view.tv_date
+
+        override fun onItemSelected() {
+            val animator = ObjectAnimator.ofInt(itemView, "backgroundColor", Color.WHITE, Color.LTGRAY).setDuration(500)
+            animator.setEvaluator(ArgbEvaluator())
+            animator.start()
+//            itemView.setBackgroundColor(Color.LTGRAY);
+        }
+        override fun onItemClear() {
+            itemView.setBackgroundColor(Color.WHITE);
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {

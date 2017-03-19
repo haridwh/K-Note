@@ -34,6 +34,21 @@ class SimpleItemTouchHelperCallback constructor(val adapter: ItemTouchHelperAdap
             adapter.onItemDismiss(viewHolder.adapterPosition)
     }
 
+    //Add Indicating the Selected View
 
+    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+        if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
+            if (viewHolder is ItemTouchHelperViewHolder) {
+                viewHolder.onItemSelected()
+            }
+        }
+        super.onSelectedChanged(viewHolder, actionState)
+    }
 
+    override fun clearView(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder) {
+        super.clearView(recyclerView, viewHolder)
+        if (viewHolder is ItemTouchHelperViewHolder) {
+            viewHolder.onItemClear()
+        }
+    }
 }

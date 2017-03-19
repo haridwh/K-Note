@@ -33,6 +33,7 @@ class MainActivity : BaseActivity() {
         fab_add.setOnClickListener { view ->
             val intent = Intent(this, WriteActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.anim_in, R.anim.anim_out)
         }
         setRV()
         items = PrefsNote.getNote(this)?.listNote
@@ -56,6 +57,7 @@ class MainActivity : BaseActivity() {
             override fun onClick(view: View, position: Int) {
                 if (PrefsNote.getNote(applicationContext)!!.listNote.get(position).password == "") {
                     startActivity(Intent(view.context, DetailActivity::class.java).putExtra("position", position))
+                    overridePendingTransition(R.anim.anim_in, R.anim.anim_out)
                 } else {
                     showPassDialog(position)
                 }
@@ -86,4 +88,6 @@ class MainActivity : BaseActivity() {
         val passDialog= PassDialog.newInstance(position)
         passDialog.show(ft, "dialog")
     }
+
+
 }

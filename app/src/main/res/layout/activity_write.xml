@@ -27,10 +27,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
         <EditText
+
             android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,5 +82,32 @@
             android:inputType="textMultiLine"
             android:padding="8dp"
             android:textColorHint="#616161"/>
+        <EditText
+            android:id="@+id/et_eDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@android:color/transparent"
+            android:gravity="top"
+            android:hint="@string/hint_detail"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:textColorHint="#616161"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@android:color/transparent"
+            android:gravity="end"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:textColorHint="#616161"
+            android:visibility="gone"
+            tools:text="Last Modified:"/>
+
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
