@@ -13,6 +13,7 @@ import com.skday.k_note.R
 import com.skday.k_note.adapter.NoteAdapter
 import com.skday.k_note.base.BaseActivity
 import com.skday.k_note.fragment.PassDialog
+import com.skday.k_note.model.ListNote
 import com.skday.k_note.model.Note
 import com.skday.k_note.prefs.PrefIntro
 import com.skday.k_note.prefs.PrefsNote
@@ -27,6 +28,7 @@ class MainActivity : BaseActivity() {
 
     var adapter: NoteAdapter? = null
     var items: ArrayList<Note>? = null
+    var isAddedWelcomeNote = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,13 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
         setRV()
+        if (!isAddedWelcomeNote){
+            var items: ListNote? = PrefsNote.getNote(this)
+            val tmp: ArrayList<Note> = ArrayList()
+            tmp.add(Note("Welcom To KeyNote", "Thanks for using our App. We hope you enjoy using this App. Please support us by rating our App", "Sincerely Cingkleung Dev", ""))
+            items = ListNote(tmp)
+            PrefsNote.setNote(items, this)
+        }
         items = PrefsNote.getNote(this)?.listNote
         setAdapter(items)
     }
