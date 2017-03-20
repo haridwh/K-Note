@@ -1,6 +1,7 @@
 package com.skday.k_note.activity
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.text.TextWatcher
@@ -22,21 +23,27 @@ class DetailActivity : BaseActivity() {
     internal var date = ""
     internal var lastModified = ""
     var position = 0
+    var menu: Menu? = null
+    var note:Note? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write)
-        val note = getData()
+        note = getData()
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        date = note.date
+        date = note!!.date
         lastModified = "Last modified: " + date
-        et_title.text = SpannableStringBuilder(note.title)
-        et_pass.text = SpannableStringBuilder(note.password)
+        et_title.text = SpannableStringBuilder(note!!.title)
+
+        if (note!!.password != ""){
+            et_pass.text = SpannableStringBuilder(note!!.password)
+            til_pass.visibility = View.VISIBLE
+        }
 
         et_detail.visibility = View.GONE
         et_eDetail.visibility = View.VISIBLE
-        et_eDetail.text = SpannableStringBuilder(note.detail)
+        et_eDetail.text = SpannableStringBuilder(note!!.detail)
 
         tv_date.visibility = View.VISIBLE
         tv_date.text = lastModified
@@ -44,7 +51,11 @@ class DetailActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        this.menu = menu
         menuInflater.inflate(R.menu.write_menu, menu)
+        if (note!!.password != ""){
+            menu?.getItem(0)?.icon = ContextCompat.getDrawable(this,R.drawable.ic_lock_open_white_24dp)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -63,8 +74,10 @@ class DetailActivity : BaseActivity() {
         } else if (item?.itemId == R.id.pass) {
             if (til_pass.visibility == View.GONE) {
                 til_pass.visibility = View.VISIBLE
+                menu?.getItem(0)?.icon = ContextCompat.getDrawable(this,R.drawable.ic_lock_open_white_24dp)
             } else {
                 til_pass.visibility = View.GONE
+                menu?.getItem(0)?.icon = ContextCompat.getDrawable(this,R.drawable.ic_lock_white_24dp)
             }
         }
         return super.onOptionsItemSelected(item)

@@ -4,11 +4,11 @@
     <item
         android:id="@+id/pass"
         android:title="@string/pass_menu"
-        android:icon="@drawable/ic_lock_white_18dp"
+        android:icon="@drawable/ic_lock_white_24dp"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/write"
-        android:icon="@drawable/ic_mode_edit_white_18dp"
+        android:icon="@drawable/ic_mode_edit_white_24dp"
         android:title="@string/write_menu"
         app:showAsAction="ifRoom"/>
 </menu>

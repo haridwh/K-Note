@@ -24,15 +24,31 @@
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="16dp"/>
     </android.support.design.widget.TextInputLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="end">
 
-    <Button
+    <TextView
         android:id="@+id/btn_save"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:hint="@string/hint_save"
-        android:textColorHint="#fff"
-        app:backgroundTint="@color/colorPrimary"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"/>
+        android:padding="16dp"
+        android:text="@string/hint_save"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/btn_cancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/hint_cancle"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+</LinearLayout>
+
 </LinearLayout>

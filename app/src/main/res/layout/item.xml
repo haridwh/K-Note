@@ -9,11 +9,17 @@
     android:background="@android:color/white">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/iv_stat"
+        android:layout_weight="0.20"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:padding="4dp"
+        android:layout_gravity="center"
+        tools:src="@drawable/ic_unlock"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_weight="0.9"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp">
@@ -26,7 +32,9 @@
         android:textSize="16sp"
         android:textStyle="bold"
         tools:text="Title"
-        android:padding="4dp"/>
+        android:padding="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
 
     <TextView
         android:id="@+id/tv_date"
@@ -35,6 +43,8 @@
         android:textColor="@color/colorDetail"
         android:textSize="12sp"
         tools:text="10 Oktober 2016"
-        android:padding="4dp"/>
+        android:padding="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
     </LinearLayout>
 </LinearLayout>

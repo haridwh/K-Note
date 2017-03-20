@@ -6,12 +6,15 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.skday.k_note.R
 import com.skday.k_note.adapter.NoteAdapter
 import com.skday.k_note.base.BaseActivity
 import com.skday.k_note.fragment.PassDialog
 import com.skday.k_note.model.Note
+import com.skday.k_note.prefs.PrefIntro
 import com.skday.k_note.prefs.PrefsNote
 import com.skday.k_note.utils.ClickListener
 import com.skday.k_note.utils.RecyclerTouchListener
@@ -44,6 +47,21 @@ class MainActivity : BaseActivity() {
         items?.clear()
         PrefsNote.getNote(this)?.listNote?.let { items?.addAll(it) }
         adapter?.notifyDataSetChanged()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.help){
+            val prefIntro = PrefIntro(this)
+            prefIntro.setFirstTimeLaunch(true)
+            startActivity(Intent(this, IntroActivity::class.java))
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun setRV() {

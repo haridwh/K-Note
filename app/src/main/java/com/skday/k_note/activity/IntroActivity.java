@@ -12,6 +12,9 @@ import android.view.WindowManager;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.skday.k_note.R;
+import com.skday.k_note.fragment.Intro;
+import com.skday.k_note.fragment.IntroOne;
+import com.skday.k_note.fragment.IntroTwo;
 import com.skday.k_note.prefs.PrefIntro;
 
 public class IntroActivity extends AppIntro {
@@ -28,15 +31,14 @@ public class IntroActivity extends AppIntro {
         }
 
         changeStatusBarColor();
-        addSlide(AppIntroFragment.newInstance("Welcome!", "This is a demo of the AppIntro library, with permissions being requested on a slide..", R.drawable.ic_slide1, Color.parseColor("#20d2bb")));
-        addSlide(AppIntroFragment.newInstance("Permission Request", "In order to access your camera, you must give permissions.", R.drawable.ic_slide2, Color.parseColor("#20d2bb")));
-        addSlide(AppIntroFragment.newInstance("Simple, yet Customizable", "The library offers a lot of customization, while keeping it simple for those that like simple.", R.drawable.ic_slide3, Color.parseColor("#20d2bb")));
-        addSlide(AppIntroFragment.newInstance("Explore", "Feel free to explore the rest of the library demo!", R.drawable.ic_slide4, Color.parseColor("#20d2bb")));
+
+        addSlide(new Intro());
+        addSlide(new IntroOne());
+        addSlide(new IntroTwo());
 
         // OPTIONAL METHODS
         // Override bar/separator color.
-        setProgressIndicator();
-        setBarColor(Color.parseColor("#20d2bb"));
+        setBarColor(Color.parseColor("#66BB6A"));
         setSeparatorColor(Color.TRANSPARENT);
     }
 
@@ -53,7 +55,7 @@ public class IntroActivity extends AppIntro {
     }
 
     private void launchHomeScreen() {
-        prefIntro.setFirstTimeLaunch(true);
+        prefIntro.setFirstTimeLaunch(false);
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
@@ -62,7 +64,7 @@ public class IntroActivity extends AppIntro {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor("#20d2bb"));
+            window.setStatusBarColor(Color.parseColor("#66BB6A"));
         }
     }
 }

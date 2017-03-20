@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.skday.k_note.R
 import com.skday.k_note.activity.DetailActivity
@@ -27,6 +29,8 @@ class PassDialog : DialogFragment(), View.OnClickListener {
             } else {
                 Toast.makeText(view.context, "Wrong Password", Toast.LENGTH_SHORT).show()
             }
+        }else if (view.id == R.id.btn_cancle){
+            dismiss()
         }
     }
 
@@ -51,9 +55,11 @@ class PassDialog : DialogFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.dialog_pass, container, false)
-        val btnSave = view?.findViewById(R.id.btn_save) as Button
+        val btnSave = view?.findViewById(R.id.btn_save) as TextView
+        val btnCancle = view?.findViewById(R.id.btn_cancle) as TextView
         btnSave.setOnClickListener(this)
-        dialog.setTitle("Enter Password")
+        btnCancle.setOnClickListener(this)
+        dialog.setTitle(R.string.dialog_title)
         return view
     }
 }

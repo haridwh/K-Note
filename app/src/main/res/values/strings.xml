@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">K-Note</string>
+    <string name="app_name">KeyNote</string>
+    <string name="app_detail">KeyNote is a simple notepad that allows you to add, edit and delete notes, and it also protects your data with password.</string>
 
     <string name="hint_title">Title</string>
     <string name="hint_password">Password</string>
@@ -9,6 +10,7 @@
     <string name="hint_cancle">Cancle</string>
     <string name="hint_save">Enter</string>
 
+    <string name="dialog_title">Enter Password</string>
     <string name="write_menu">Write</string>
     <string name="pass_menu">Pass</string>
 </resources>

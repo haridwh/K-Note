@@ -19,11 +19,7 @@ import java.util.*
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.TransitionDrawable
 import android.animation.ObjectAnimator
-
-
-
-
-
+import android.widget.ImageView
 
 
 /**
@@ -36,12 +32,12 @@ class NoteAdapter constructor(val contex: Context, val items: ArrayList<Note>, v
     class ViewHolder constructor(view: View) : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder{
         val title: TextView = view.tv_title
         val date: TextView = view.tv_date
+        val image: ImageView = view.iv_stat
 
         override fun onItemSelected() {
             val animator = ObjectAnimator.ofInt(itemView, "backgroundColor", Color.WHITE, Color.LTGRAY).setDuration(300)
             animator.setEvaluator(ArgbEvaluator())
             animator.start()
-//            itemView.setBackgroundColor(Color.LTGRAY);
         }
         override fun onItemClear() {
             itemView.setBackgroundColor(Color.WHITE);
@@ -56,6 +52,11 @@ class NoteAdapter constructor(val contex: Context, val items: ArrayList<Note>, v
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.title?.text = items.get(position).title
         holder?.date?.text = items.get(position).date
+        if (items.get(position).password == ""){
+            holder?.image?.setImageResource(R.drawable.ic_unlock)
+        }else if (items.get(position).password != ""){
+            holder?.image?.setImageResource(R.drawable.ic_lock)
+        }
     }
 
     override fun getItemCount(): Int {
