@@ -38,7 +38,7 @@ class NoteAdapter constructor(val contex: Context, val items: ArrayList<Note>, v
         val date: TextView = view.tv_date
 
         override fun onItemSelected() {
-            val animator = ObjectAnimator.ofInt(itemView, "backgroundColor", Color.WHITE, Color.LTGRAY).setDuration(500)
+            val animator = ObjectAnimator.ofInt(itemView, "backgroundColor", Color.WHITE, Color.LTGRAY).setDuration(300)
             animator.setEvaluator(ArgbEvaluator())
             animator.start()
 //            itemView.setBackgroundColor(Color.LTGRAY);

@@ -11,7 +11,6 @@ import com.skday.k_note.R
 import com.skday.k_note.adapter.NoteAdapter
 import com.skday.k_note.base.BaseActivity
 import com.skday.k_note.fragment.PassDialog
-import com.skday.k_note.model.ListNote
 import com.skday.k_note.model.Note
 import com.skday.k_note.prefs.PrefsNote
 import com.skday.k_note.utils.ClickListener
@@ -19,6 +18,7 @@ import com.skday.k_note.utils.RecyclerTouchListener
 import com.skday.k_note.utils.SimpleItemTouchHelperCallback
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+
 
 class MainActivity : BaseActivity() {
 
@@ -33,7 +33,6 @@ class MainActivity : BaseActivity() {
         fab_add.setOnClickListener { view ->
             val intent = Intent(this, WriteActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.anim_in, R.anim.anim_out)
         }
         setRV()
         items = PrefsNote.getNote(this)?.listNote
@@ -57,7 +56,6 @@ class MainActivity : BaseActivity() {
             override fun onClick(view: View, position: Int) {
                 if (PrefsNote.getNote(applicationContext)!!.listNote.get(position).password == "") {
                     startActivity(Intent(view.context, DetailActivity::class.java).putExtra("position", position))
-                    overridePendingTransition(R.anim.anim_in, R.anim.anim_out)
                 } else {
                     showPassDialog(position)
                 }
@@ -67,7 +65,7 @@ class MainActivity : BaseActivity() {
 
     fun setAdapter(items: ArrayList<Note>?) {
         if (items != null) {
-            Log.i("TAG", items!!.size.toString() + "Main")
+            Log.i("TAG", items.size.toString() + "Main")
             adapter = NoteAdapter(this, items, rv)
             Log.i("TAG", adapter!!.itemCount.toString() + "adapter")
             rv.adapter = adapter
@@ -88,6 +86,4 @@ class MainActivity : BaseActivity() {
         val passDialog= PassDialog.newInstance(position)
         passDialog.show(ft, "dialog")
     }
-
-
 }

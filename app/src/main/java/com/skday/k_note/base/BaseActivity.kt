@@ -17,15 +17,9 @@ open class BaseActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {
             onBackPressed()
-            overridePendingTransition(R.anim.anim_in, R.anim.anim_out)
             return true
         } else {
             return super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        overridePendingTransition(R.anim.anim_in, R.anim.anim_out)
     }
 }
