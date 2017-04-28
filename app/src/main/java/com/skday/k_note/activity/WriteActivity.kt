@@ -1,13 +1,11 @@
 package com.skday.k_note.activity
 
-import android.app.DialogFragment
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.skday.k_note.R
 import com.skday.k_note.base.BaseActivity
-import com.skday.k_note.fragment.PassDialog
 import com.skday.k_note.model.ListNote
 import com.skday.k_note.model.Note
 import com.skday.k_note.prefs.PrefsNote

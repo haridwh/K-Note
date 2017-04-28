@@ -18,9 +18,10 @@ class PrefIntro {
     var PRIVATE_MODE = 0
 
     // Shared preferences file name
-    private val PREF_NAME = "androidhive-welcome"
+    private val PREF_NAME = "intro"
 
     private val IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch"
+    private val IS_FIRST_NOTE = "IsFirstNote"
 
     constructor(context: Context?) {
         this.context = context
@@ -36,5 +37,14 @@ class PrefIntro {
 
     fun isFirstTimeLaunch(): Boolean {
         return pref!!.getBoolean(IS_FIRST_TIME_LAUNCH, true)
+    }
+
+    fun setFirstNote(isFirstNote: Boolean){
+        editor?.putBoolean(IS_FIRST_NOTE, isFirstNote)
+        editor?.commit()
+    }
+
+    fun isFirstNote(): Boolean {
+        return pref!!.getBoolean(IS_FIRST_NOTE, true)
     }
 }

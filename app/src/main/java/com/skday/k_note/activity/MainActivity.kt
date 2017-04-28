@@ -30,6 +30,7 @@ class MainActivity : BaseActivity() {
     var items: ArrayList<Note>? = null
     var isAddedWelcomeNote = false
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,12 +41,14 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
         setRV()
-        if (!isAddedWelcomeNote){
-            var items: ListNote? = PrefsNote.getNote(this)
+        val prefIntro: PrefIntro = PrefIntro(this)
+        if (prefIntro.isFirstNote()) {
+            var item: ListNote? = PrefsNote.getNote(this)
             val tmp: ArrayList<Note> = ArrayList()
             tmp.add(Note("Welcom To KeyNote", "Thanks for using our App. We hope you enjoy using this App. Please support us by rating our App", "Sincerely Cingkleung Dev", ""))
-            items = ListNote(tmp)
-            PrefsNote.setNote(items, this)
+            item = ListNote(tmp)
+            PrefsNote.setNote(item, this)
+            prefIntro.setFirstNote(false)
         }
         items = PrefsNote.getNote(this)?.listNote
         setAdapter(items)
@@ -59,12 +62,12 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu,menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.help){
+        if (item?.itemId == R.id.help) {
             val prefIntro = PrefIntro(this)
             prefIntro.setFirstTimeLaunch(true)
             startActivity(Intent(this, IntroActivity::class.java))
@@ -110,7 +113,7 @@ class MainActivity : BaseActivity() {
         }
         ft.addToBackStack(null)
 
-        val passDialog= PassDialog.newInstance(position)
+        val passDialog = PassDialog.newInstance(position)
         passDialog.show(ft, "dialog")
     }
 }
